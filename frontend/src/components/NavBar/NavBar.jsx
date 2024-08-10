@@ -7,7 +7,7 @@ import { StoreContext } from '../../context/StoreContext';
 
 const NavBar = ({setShowLogin}) => {
 
-    const {cartItems} = useContext(StoreContext);
+    const {cartItems, token, setToken} = useContext(StoreContext);
 
     const navigate = useNavigate();
 
@@ -16,6 +16,12 @@ const NavBar = ({setShowLogin}) => {
     const routeMeTo = (loc) => {
       navigate(`/${loc}`);
     };
+
+    const logout = () => {
+      localStorage.removeItem('token');
+      setToken('');
+      routeMeTo('');
+    }
 
   return (
     <div className='navbar'>
@@ -34,7 +40,19 @@ const NavBar = ({setShowLogin}) => {
             <img src={assets.basket_icon} alt="basket-icon" />
             {Object.keys(cartItems).length > 0 && <div className="dot"></div>}
         </div>
-        <button onClick={() => setShowLogin(true)}>Sign In</button>
+        {
+          !token ? 
+            <button onClick={() => setShowLogin(true)}>Sign In</button>
+          :
+            <div className='navbar-profile'>
+              <img src={assets.profile_icon} alt="profile-icon" />
+              <ul className='nav-profile-dropdown'>
+                <li><img src={assets.bag_icon} alt="bag-icon" />Orders</li>
+                <hr />
+                <li onClick={logout}><img src={assets.logout_icon} alt="logout-icon" />Logout</li>
+              </ul>
+            </div>
+        }
       </div>
     </div>
   )
