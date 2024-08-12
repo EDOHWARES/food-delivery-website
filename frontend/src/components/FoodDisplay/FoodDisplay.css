@@ -14,3 +14,11 @@
     gap: 30px;
     row-gap: 50px;
 }
+
+.loader_container {
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
