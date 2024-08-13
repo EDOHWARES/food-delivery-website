@@ -65,6 +65,7 @@ const placeOrder = async (req, res) => {
     };
 };
 
+// Verify order
 const verifyOrder = async (req, res) => {
     const {orderId, success} = req.body;
 
@@ -94,4 +95,24 @@ const verifyOrder = async (req, res) => {
     };
 };
 
-export {placeOrder, verifyOrder};
+// User orders for frontend 
+const userOrders = async (req, res) => {
+    try {
+        const orders = await orderModel.find({userId: req.body.userId});
+        
+        res.json({
+            success: true,
+            data: orders,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            success: false,
+            message: 'Error',
+            error: error.message,
+        });
+    };
+};
+
+export {placeOrder, verifyOrder, userOrders};
