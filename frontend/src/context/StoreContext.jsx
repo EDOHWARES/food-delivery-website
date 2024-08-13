@@ -54,9 +54,7 @@ const StoreContextProvider = (props) => {
 
     const loadCartData = async (token) => {
         const resp = await axios.get(`${url}/api/cart/get`, {headers: {token}});
-        console.log(resp);
         setCartItems(resp.data.cartData);
-        console.log(cartItems);
     }
 
     useEffect(() => {
@@ -67,9 +65,9 @@ const StoreContextProvider = (props) => {
                 await loadCartData(localStorage.getItem('token'));
             };
         };
-
+        
         loadData();
-    }, [])
+    }, []);
 
     const contextValue = {
         token,

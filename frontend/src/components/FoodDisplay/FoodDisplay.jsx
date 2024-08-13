@@ -9,6 +9,7 @@ const FoodDisplay = ({category}) => {
 
   return (
     <>
+      <h2>Top Dishes Near You</h2>
       {
         loading ?
         <div className='loader_container'>
@@ -18,7 +19,6 @@ const FoodDisplay = ({category}) => {
         </div>
         :
         <div className='food-display' id='food-display'>
-        <h2>Top Dishes Near You</h2>
         <div className="food-display-list">
           {
               food_list.map((item, index) => {
